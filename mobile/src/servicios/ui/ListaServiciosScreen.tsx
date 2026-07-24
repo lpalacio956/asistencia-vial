@@ -2,6 +2,7 @@ import { ActivityIndicator, FlatList, RefreshControl, Text, View } from 'react-n
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useServicios } from '../state/use-servicios';
 import { TarjetaServicio } from './components/TarjetaServicio';
+import { FormularioCrearServicio } from './components/FormularioCrearServicio';
 
 export function ListaServiciosScreen() {
   const { servicios, cargando, error, recargar } = useServicios();
@@ -10,6 +11,8 @@ export function ListaServiciosScreen() {
     <SafeAreaView className="flex-1 bg-slate-50">
       <View className="flex-1 px-4 pt-4">
         <Text className="mb-4 text-xl font-bold text-slate-900">Servicios de asistencia vial</Text>
+
+        <FormularioCrearServicio />
 
         {error && (
           <View className="mb-3 rounded-lg bg-red-50 p-3">
