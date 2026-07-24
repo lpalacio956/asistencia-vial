@@ -1,0 +1,14 @@
+# dependencias
+node_modules
+
+# build
+dist
+
+# variables de entorno (contiene la ruta de la base de datos local)
+.env
+
+# base de datos SQLite local
+prisma/dev.db
+
+# coverage de tests
+coverage
