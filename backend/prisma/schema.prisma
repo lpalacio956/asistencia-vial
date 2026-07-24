@@ -9,3 +9,18 @@ datasource db {
   provider = "sqlite"
   url      = env("DATABASE_URL")
 }
+
+// tipo y estado se guardan como String porque el conector de SQLite
+// de Prisma no soporta enums nativos; el adaptador de infraestructura
+// convierte hacia/desde los enums del dominio (TipoServicio, EstadoServicio).
+model Servicio {
+  id            String   @id @default(uuid())
+  tipo          String
+  estado        String
+  descripcion   String
+  ubicacion     String
+  creadoEn      DateTime @default(now())
+  actualizadoEn DateTime @updatedAt
+
+  @@map("servicios")
+}
