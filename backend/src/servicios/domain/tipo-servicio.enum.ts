@@ -1,0 +1,7 @@
+export enum TipoServicio {
+  GRUA = 'GRUA',
+  BATERIA = 'BATERIA',
+  LLANTA = 'LLANTA',
+  COMBUSTIBLE = 'COMBUSTIBLE',
+  CERRAJERIA = 'CERRAJERIA',
+}
