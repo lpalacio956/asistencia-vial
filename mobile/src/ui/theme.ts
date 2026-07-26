@@ -4,12 +4,26 @@ import { EstadoServicio } from '../servicios/domain/servicio.schema';
 // colores sueltos. Cambiar el look de la app es cambiar este archivo, no cada pantalla.
 export const colorFondo = 'bg-neutral-950';
 export const colorSuperficie = 'bg-neutral-900';
+export const colorSuperficieElevada = 'bg-neutral-800';
 export const colorBorde = 'border-neutral-800';
+export const colorBordeElevado = 'border-neutral-700';
 export const colorTextoPrimario = 'text-neutral-50';
 export const colorTextoSecundario = 'text-neutral-400';
 export const colorAccento = 'bg-amber-500';
 export const colorAccentoTexto = 'text-amber-500';
 export const colorSobreAccento = 'text-neutral-950';
+
+// Geometría de la barra de pestañas flotante, compartida entre TabBarInferior
+// (para su posición) y las pantallas (para el padding-bottom de sus listas) —
+// un solo lugar para que ambos números nunca queden desincronizados.
+export const ALTO_TAB_BAR_FLOTANTE = 56;
+export const MARGEN_INFERIOR_TAB_BAR = 16;
+export const ESPACIO_EXTRA_LISTA = 24;
+
+/** Cuánto padding-bottom necesita una lista para que su último item no quede tapado por la píldora. */
+export function paddingListaSobreTabBar(insetBottom: number): number {
+  return insetBottom + MARGEN_INFERIOR_TAB_BAR + ALTO_TAB_BAR_FLOTANTE + ESPACIO_EXTRA_LISTA;
+}
 
 export const coloresPorEstado: Record<EstadoServicio, string> = {
   PENDIENTE: 'bg-amber-500/15 text-amber-400',

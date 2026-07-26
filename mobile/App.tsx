@@ -15,7 +15,7 @@ export default function App() {
   return (
     <SafeAreaProvider>
       <ServiciosProvider>
-        <SafeAreaView className={`flex-1 ${colorFondo}`} edges={['top', 'bottom']}>
+        <SafeAreaView className={`flex-1 ${colorFondo}`} edges={['top']}>
           <View className="flex-1">
             {tab === 'servicios' ? <ServiciosScreen /> : <ActividadScreen />}
           </View>

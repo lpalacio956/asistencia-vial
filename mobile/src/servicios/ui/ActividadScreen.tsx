@@ -1,10 +1,12 @@
 import { ActivityIndicator, FlatList, RefreshControl, Text, View } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useServicios } from '../state/use-servicios';
 import { TarjetaServicio } from './components/TarjetaServicio';
-import { colorTextoPrimario, colorTextoSecundario, hexAccento } from '../../ui/theme';
+import { colorTextoPrimario, colorTextoSecundario, hexAccento, paddingListaSobreTabBar } from '../../ui/theme';
 
 export function ActividadScreen() {
   const { serviciosHistorial, cargando, error, recargar } = useServicios();
+  const insets = useSafeAreaInsets();
 
   return (
     <View className="flex-1 px-4 pt-4">
@@ -27,6 +29,7 @@ export function ActividadScreen() {
           data={serviciosHistorial}
           keyExtractor={(servicio) => servicio.id}
           renderItem={({ item }) => <TarjetaServicio servicio={item} />}
+          contentContainerStyle={{ paddingBottom: paddingListaSobreTabBar(insets.bottom) }}
           refreshControl={
             <RefreshControl refreshing={cargando} onRefresh={recargar} tintColor={hexAccento} />
           }
