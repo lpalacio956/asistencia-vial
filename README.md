@@ -68,16 +68,20 @@ infraestructura  ──depende de──▶  aplicación  ──depende de──�
 | Estado en el móvil | Context + hook (`useServicios`) | Una sola pantalla con tres acciones no justifica una librería de estado global | Redux/Zustand — abstracción de más para este alcance |
 | Tests del móvil | Capa de datos (cliente HTTP con `fetch` mockeado) | No depende de renderizar componentes; cubre el punto más fácil de romper sin darse cuenta (parseo, status codes) | Testing de componentes con React Native Testing Library — más fricción de setup para el mismo valor aquí |
 | Botones de cambio de estado en la UI | `transicionesPermitidas(estado)` en `mobile/src/servicios/domain/`, espejo de la tabla del backend, en un solo lugar | La UI solo debe *guiar* al usuario mostrando acciones que tienen sentido; el backend sigue siendo la única fuente de verdad que valida y rechaza — un `curl` directo con una transición inválida sigue devolviendo 409 | Mostrar siempre los 4 estados restantes y dejar que el backend rechace — funciona, pero ofrece acciones destinadas a fallar, mala UX |
+| Navegación por pestañas | `useState<'servicios' \| 'actividad'>` en `App.tsx` + un `TabBarInferior` propio | Son 2 pestañas planas, sin navegación anidada ni deep-linking; un estado local resuelve el 100% del alcance sin dependencias nuevas, justo antes de la defensa (menos riesgo de romper algo de última hora) | `expo-router` con tabs de archivo — es "lo oficial", pero trae ~5 dependencias nuevas y reestructura el entry point para un caso que no necesita esa potencia |
+| Filtro Activos/Actividad | `esServicioActivo`/`esServicioHistorial` en `domain/categoria-servicio.ts`; el hook `useServicios()` expone `serviciosActivos` y `serviciosHistorial` ya filtrados con `useMemo` sobre el mismo array | Un solo fetch, un solo array de estado; las dos pestañas son vistas derivadas, no dos fuentes de datos independientes — evita que se desincronicen | Un fetch/estado separado por pestaña — duplicaría la llamada al backend y el estado de carga/error sin necesidad |
+| Pestaña Actividad de solo lectura | No se agregó ninguna prop "modo lectura" a `TarjetaServicio` | `FINALIZADO` y `CANCELADO` son estados terminales: `transicionesPermitidas()` ya devuelve `[]` para ambos, así que la tarjeta no renderiza botones de acción automáticamente — la regla de dominio del Bloque 2 ya resuelve esto gratis | Una prop `soloLectura` explícita — hubiera sido código redundante para algo que el dominio ya garantiza |
+| Paleta oscura | Tokens centralizados en `mobile/src/ui/theme.ts` (fondo, superficie, texto, acento, colores por estado), importados por cada componente | Cambiar el look de la app es cambiar un archivo, no perseguir colores sueltos por 5 pantallas; los badges de estado usan fondo translúcido + texto brillante (ej. `bg-emerald-500/15 text-emerald-400`) para mantener buen contraste sobre fondo casi negro | Clases de color escritas directamente en cada componente — funciona pero es lo que la consigna pedía evitar explícitamente |
 
 ## Capturas de pantalla
 
 <!-- Inserta aquí las capturas: arrastra las imágenes a esta carpeta como
      docs/screenshots/nombre.png y referencia con ![descripción](docs/screenshots/nombre.png) -->
 
-- **Lista de servicios**: _(pendiente)_
-- **Formulario de creación**: _(pendiente)_
-- **Cambio de estado exitoso**: _(pendiente)_
-- **Transición inválida rechazada**: _(pendiente)_
+- **Pestaña Servicios (tema oscuro, lista + formulario)**: *(pendiente)*
+- **Tarjeta con botones de transición válidos**: *(pendiente)*
+- **Pestaña Actividad (historial, solo lectura)**: *(pendiente)*
+- **Pestaña Actividad vacía**: *(pendiente)*
 
 ## Known issues
 
