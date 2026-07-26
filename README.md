@@ -67,6 +67,7 @@ infraestructura  ──depende de──▶  aplicación  ──depende de──�
 | Validación en 3 capas | class-validator (forma del request) → dominio (invariantes de negocio) → Zod en móvil (formulario + respuesta) | Cada capa valida solo lo que le compete; el móvil no confía ciegamente en que el backend nunca cambia de forma | Validar todo solo en el backend — el móvil quedaría sin defensa ante una respuesta inesperada |
 | Estado en el móvil | Context + hook (`useServicios`) | Una sola pantalla con tres acciones no justifica una librería de estado global | Redux/Zustand — abstracción de más para este alcance |
 | Tests del móvil | Capa de datos (cliente HTTP con `fetch` mockeado) | No depende de renderizar componentes; cubre el punto más fácil de romper sin darse cuenta (parseo, status codes) | Testing de componentes con React Native Testing Library — más fricción de setup para el mismo valor aquí |
+| Botones de cambio de estado en la UI | `transicionesPermitidas(estado)` en `mobile/src/servicios/domain/`, espejo de la tabla del backend, en un solo lugar | La UI solo debe *guiar* al usuario mostrando acciones que tienen sentido; el backend sigue siendo la única fuente de verdad que valida y rechaza — un `curl` directo con una transición inválida sigue devolviendo 409 | Mostrar siempre los 4 estados restantes y dejar que el backend rechace — funciona, pero ofrece acciones destinadas a fallar, mala UX |
 
 ## Capturas de pantalla
 
