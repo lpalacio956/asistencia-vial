@@ -1,11 +1,14 @@
-import { createContext, ReactNode, useCallback, useEffect, useState } from 'react';
+import { createContext, ReactNode, useCallback, useEffect, useMemo, useState } from 'react';
 import { EstadoServicio, Servicio } from '../domain/servicio.schema';
 import { CrearServicioInput } from '../domain/crear-servicio.schema';
+import { esServicioActivo, esServicioHistorial } from '../domain/categoria-servicio';
 import { serviciosApi } from '../data/servicios.api';
 import { ErrorApi } from '../data/api.error';
 
 export interface ServiciosContextValor {
   servicios: Servicio[];
+  serviciosActivos: Servicio[];
+  serviciosHistorial: Servicio[];
   cargando: boolean;
   error: string | null;
   recargar: () => Promise<void>;
@@ -56,9 +59,28 @@ export function ServiciosProvider({ children }: { children: ReactNode }) {
     );
   }, []);
 
+  // Un solo array cargado desde el backend; estas son vistas derivadas, no fetches nuevos.
+  const serviciosActivos = useMemo(
+    () => servicios.filter((servicio) => esServicioActivo(servicio.estado)),
+    [servicios],
+  );
+  const serviciosHistorial = useMemo(
+    () => servicios.filter((servicio) => esServicioHistorial(servicio.estado)),
+    [servicios],
+  );
+
   return (
     <ServiciosContext.Provider
-      value={{ servicios, cargando, error, recargar, crearServicio, cambiarEstadoServicio }}
+      value={{
+        servicios,
+        serviciosActivos,
+        serviciosHistorial,
+        cargando,
+        error,
+        recargar,
+        crearServicio,
+        cambiarEstadoServicio,
+      }}
     >
       {children}
     </ServiciosContext.Provider>
