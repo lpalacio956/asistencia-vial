@@ -1,5 +1,6 @@
 import { Alert, Pressable, Text, View } from 'react-native';
-import { EstadoServicioSchema, Servicio } from '../../domain/servicio.schema';
+import { Servicio } from '../../domain/servicio.schema';
+import { transicionesPermitidas } from '../../domain/transiciones-estado';
 import { useServicios } from '../../state/use-servicios';
 import { ErrorApi } from '../../data/api.error';
 
@@ -43,7 +44,7 @@ export function TarjetaServicio({ servicio }: Props) {
     }
   }
 
-  const otrosEstados = EstadoServicioSchema.options.filter((estado) => estado !== servicio.estado);
+  const estadosSiguientes = transicionesPermitidas(servicio.estado);
 
   return (
     <View className="mb-3 rounded-xl border border-slate-200 bg-white p-4">
@@ -60,17 +61,21 @@ export function TarjetaServicio({ servicio }: Props) {
       <Text className="mt-1 text-sm text-slate-600">{servicio.descripcion}</Text>
       <Text className="mt-0.5 text-sm text-slate-400">{servicio.ubicacion}</Text>
 
-      <View className="mt-3 flex-row flex-wrap gap-2">
-        {otrosEstados.map((estado) => (
-          <Pressable
-            key={estado}
-            onPress={() => intentarCambiarEstado(estado)}
-            className="rounded-lg bg-slate-100 px-3 py-1.5 active:bg-slate-200"
-          >
-            <Text className="text-xs font-medium text-slate-700">→ {ETIQUETA_ESTADO[estado]}</Text>
-          </Pressable>
-        ))}
-      </View>
+      {estadosSiguientes.length > 0 && (
+        <View className="mt-3 flex-row flex-wrap gap-2">
+          {estadosSiguientes.map((estado) => (
+            <Pressable
+              key={estado}
+              onPress={() => intentarCambiarEstado(estado)}
+              className="rounded-lg bg-slate-100 px-3 py-1.5 active:bg-slate-200"
+            >
+              <Text className="text-xs font-medium text-slate-700">
+                → {ETIQUETA_ESTADO[estado]}
+              </Text>
+            </Pressable>
+          ))}
+        </View>
+      )}
     </View>
   );
 }
