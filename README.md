@@ -75,13 +75,20 @@ infraestructura  ──depende de──▶  aplicación  ──depende de──�
 
 ## Capturas de pantalla
 
-<!-- Inserta aquí las capturas: arrastra las imágenes a esta carpeta como
-     docs/screenshots/nombre.png y referencia con ![descripción](docs/screenshots/nombre.png) -->
+<!-- La carpeta docs/screenshots/ ya existe. Guarda cada imagen exactamente con
+     el nombre de archivo indicado abajo y la captura aparece sola (ya está enlazada). -->
 
-- **Pestaña Servicios (tema oscuro, lista + formulario)**: *(pendiente)*
-- **Tarjeta con botones de transición válidos**: *(pendiente)*
-- **Pestaña Actividad (historial, solo lectura)**: *(pendiente)*
-- **Pestaña Actividad vacía**: *(pendiente)*
+**Pestaña Servicios (tema oscuro, lista + formulario)**
+![Pestaña Servicios](docs/screenshots/servicios-tema-oscuro.png)
+
+**Tarjeta con botones de transición válidos**
+![Tarjeta con transiciones válidas](docs/screenshots/tarjeta-transiciones.png)
+
+**Pestaña Actividad (historial, solo lectura)**
+![Pestaña Actividad](docs/screenshots/actividad-historial.png)
+
+**Pestaña Actividad vacía**
+![Pestaña Actividad vacía](docs/screenshots/actividad-vacia.png)
 
 ## Known issues
 
@@ -95,10 +102,19 @@ infraestructura  ──depende de──▶  aplicación  ──depende de──�
 - La cobertura de tests del backend es alta en `domain`/`application` (90-100%) pero 0% en
   `infrastructure` — esa capa se verificó manualmente con `curl` (ver `backend/README.md`),
   no con tests automatizados, por decisión de alcance.
+- `GET /servicios` trae todos los registros sin paginar; con muchos servicios (ej. cientos
+  en Actividad), la respuesta y el `FlatList` del móvil crecerían sin límite.
+- El tema es oscuro fijo, sin opción de cambiar a claro — fue una decisión de diseño
+  explícita ("aire tipo Uber"), no una funcionalidad a medias.
+- `react-native-reanimated` quedó instalado (dependencia de NativeWind) pero no se usa
+  directamente en ningún componente — se podría remover si no se agregan animaciones.
+- No hay historial de auditoría: solo se guarda el estado actual del servicio, no quién ni
+  cuándo cambió cada transición.
 
 ## Qué mejoraría con más tiempo
 
 - Tests automatizados de infraestructura (controller + filtro) con supertest.
-- Paginación en `GET /servicios` (ahora mismo trae todo).
+- Paginación en `GET /servicios`, con filtro por estado resuelto en el backend (hoy el
+  filtro Activos/Actividad es 100% del lado del cliente sobre la lista completa).
 - Historial/auditoría de cambios de estado (quién cambió qué y cuándo).
 - Autenticación simple si el caso de uso real lo requiriera.
