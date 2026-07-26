@@ -4,6 +4,14 @@ import { CrearServicioSchema } from '../../domain/crear-servicio.schema';
 import { TipoServicio, TipoServicioSchema } from '../../domain/servicio.schema';
 import { useServicios } from '../../state/use-servicios';
 import { ErrorApi } from '../../data/api.error';
+import {
+  colorAccento,
+  colorBorde,
+  colorSobreAccento,
+  colorSuperficie,
+  colorTextoPrimario,
+  hexTextoSecundario,
+} from '../../../ui/theme';
 
 const ETIQUETA_TIPO: Record<TipoServicio, string> = {
   GRUA: 'Grúa',
@@ -43,18 +51,18 @@ export function FormularioCrearServicio() {
   }
 
   return (
-    <View className="mb-4 rounded-xl border border-slate-200 bg-white p-4">
-      <Text className="mb-2 text-sm font-semibold text-slate-900">Nuevo servicio</Text>
+    <View className={`mb-4 rounded-xl border ${colorBorde} ${colorSuperficie} p-4`}>
+      <Text className={`mb-2 text-sm font-semibold ${colorTextoPrimario}`}>Nuevo servicio</Text>
 
       <View className="mb-2 flex-row flex-wrap gap-2">
         {TipoServicioSchema.options.map((opcion) => (
           <Pressable
             key={opcion}
             onPress={() => setTipo(opcion)}
-            className={`rounded-lg px-3 py-1.5 ${tipo === opcion ? 'bg-slate-900' : 'bg-slate-100'}`}
+            className={`rounded-lg px-3 py-1.5 ${tipo === opcion ? colorAccento : 'bg-neutral-800'}`}
           >
             <Text
-              className={`text-xs font-medium ${tipo === opcion ? 'text-white' : 'text-slate-700'}`}
+              className={`text-xs font-medium ${tipo === opcion ? colorSobreAccento : 'text-neutral-300'}`}
             >
               {ETIQUETA_TIPO[opcion]}
             </Text>
@@ -64,19 +72,21 @@ export function FormularioCrearServicio() {
 
       <TextInput
         placeholder="Descripción"
+        placeholderTextColor={hexTextoSecundario}
         value={descripcion}
         onChangeText={setDescripcion}
-        className="mb-2 rounded-lg border border-slate-200 px-3 py-2 text-sm"
+        className={`mb-2 rounded-lg border ${colorBorde} bg-neutral-800 px-3 py-2 text-sm ${colorTextoPrimario}`}
       />
       <TextInput
         placeholder="Ubicación"
+        placeholderTextColor={hexTextoSecundario}
         value={ubicacion}
         onChangeText={setUbicacion}
-        className="mb-2 rounded-lg border border-slate-200 px-3 py-2 text-sm"
+        className={`mb-2 rounded-lg border ${colorBorde} bg-neutral-800 px-3 py-2 text-sm ${colorTextoPrimario}`}
       />
 
       {errores.map((mensaje) => (
-        <Text key={mensaje} className="mb-1 text-xs text-red-600">
+        <Text key={mensaje} className="mb-1 text-xs text-red-400">
           {mensaje}
         </Text>
       ))}
@@ -84,9 +94,9 @@ export function FormularioCrearServicio() {
       <Pressable
         onPress={enviar}
         disabled={enviando}
-        className="mt-1 items-center rounded-lg bg-slate-900 px-3 py-2 active:bg-slate-700 disabled:opacity-50"
+        className={`mt-1 items-center rounded-lg ${colorAccento} px-3 py-2 active:opacity-80 disabled:opacity-50`}
       >
-        <Text className="text-sm font-medium text-white">
+        <Text className={`text-sm font-medium ${colorSobreAccento}`}>
           {enviando ? 'Creando...' : 'Crear servicio'}
         </Text>
       </Pressable>

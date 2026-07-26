@@ -1,17 +1,14 @@
 import { ActivityIndicator, FlatList, RefreshControl, Text, View } from 'react-native';
 import { useServicios } from '../state/use-servicios';
 import { TarjetaServicio } from './components/TarjetaServicio';
-import { FormularioCrearServicio } from './components/FormularioCrearServicio';
 import { colorTextoPrimario, colorTextoSecundario, hexAccento } from '../../ui/theme';
 
-export function ServiciosScreen() {
-  const { serviciosActivos, cargando, error, recargar } = useServicios();
+export function ActividadScreen() {
+  const { serviciosHistorial, cargando, error, recargar } = useServicios();
 
   return (
     <View className="flex-1 px-4 pt-4">
-      <Text className={`mb-4 text-xl font-bold ${colorTextoPrimario}`}>Servicios activos</Text>
-
-      <FormularioCrearServicio />
+      <Text className={`mb-4 text-xl font-bold ${colorTextoPrimario}`}>Actividad</Text>
 
       {error && (
         <View className="mb-3 rounded-lg bg-red-500/10 p-3">
@@ -19,15 +16,15 @@ export function ServiciosScreen() {
         </View>
       )}
 
-      {cargando && serviciosActivos.length === 0 ? (
+      {cargando && serviciosHistorial.length === 0 ? (
         <ActivityIndicator className="mt-8" color={hexAccento} />
-      ) : serviciosActivos.length === 0 ? (
+      ) : serviciosHistorial.length === 0 ? (
         <Text className={`mt-8 text-center text-sm ${colorTextoSecundario}`}>
-          No hay servicios activos todavía.
+          Aún no hay servicios finalizados o cancelados.
         </Text>
       ) : (
         <FlatList
-          data={serviciosActivos}
+          data={serviciosHistorial}
           keyExtractor={(servicio) => servicio.id}
           renderItem={({ item }) => <TarjetaServicio servicio={item} />}
           refreshControl={

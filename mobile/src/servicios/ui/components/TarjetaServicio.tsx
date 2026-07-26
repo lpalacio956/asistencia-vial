@@ -3,6 +3,7 @@ import { Servicio } from '../../domain/servicio.schema';
 import { transicionesPermitidas } from '../../domain/transiciones-estado';
 import { useServicios } from '../../state/use-servicios';
 import { ErrorApi } from '../../data/api.error';
+import { colorBorde, colorSuperficie, colorTextoPrimario, colorTextoSecundario, coloresPorEstado } from '../../../ui/theme';
 
 const ETIQUETA_TIPO: Record<Servicio['tipo'], string> = {
   GRUA: 'Grúa',
@@ -18,14 +19,6 @@ const ETIQUETA_ESTADO: Record<Servicio['estado'], string> = {
   EN_RUTA: 'En ruta',
   FINALIZADO: 'Finalizado',
   CANCELADO: 'Cancelado',
-};
-
-const COLOR_ESTADO: Record<Servicio['estado'], string> = {
-  PENDIENTE: 'bg-amber-100 text-amber-800',
-  ASIGNADO: 'bg-blue-100 text-blue-800',
-  EN_RUTA: 'bg-indigo-100 text-indigo-800',
-  FINALIZADO: 'bg-emerald-100 text-emerald-800',
-  CANCELADO: 'bg-slate-200 text-slate-600',
 };
 
 interface Props {
@@ -47,19 +40,19 @@ export function TarjetaServicio({ servicio }: Props) {
   const estadosSiguientes = transicionesPermitidas(servicio.estado);
 
   return (
-    <View className="mb-3 rounded-xl border border-slate-200 bg-white p-4">
+    <View className={`mb-3 rounded-xl border ${colorBorde} ${colorSuperficie} p-4`}>
       <View className="flex-row items-center justify-between">
-        <Text className="text-base font-semibold text-slate-900">
+        <Text className={`text-base font-semibold ${colorTextoPrimario}`}>
           {ETIQUETA_TIPO[servicio.tipo]}
         </Text>
         <Text
-          className={`overflow-hidden rounded-full px-2 py-1 text-xs font-medium ${COLOR_ESTADO[servicio.estado]}`}
+          className={`overflow-hidden rounded-full px-2 py-1 text-xs font-medium ${coloresPorEstado[servicio.estado]}`}
         >
           {ETIQUETA_ESTADO[servicio.estado]}
         </Text>
       </View>
-      <Text className="mt-1 text-sm text-slate-600">{servicio.descripcion}</Text>
-      <Text className="mt-0.5 text-sm text-slate-400">{servicio.ubicacion}</Text>
+      <Text className={`mt-1 text-sm ${colorTextoSecundario}`}>{servicio.descripcion}</Text>
+      <Text className={`mt-0.5 text-sm ${colorTextoSecundario}`}>{servicio.ubicacion}</Text>
 
       {estadosSiguientes.length > 0 && (
         <View className="mt-3 flex-row flex-wrap gap-2">
@@ -67,9 +60,9 @@ export function TarjetaServicio({ servicio }: Props) {
             <Pressable
               key={estado}
               onPress={() => intentarCambiarEstado(estado)}
-              className="rounded-lg bg-slate-100 px-3 py-1.5 active:bg-slate-200"
+              className="rounded-lg bg-neutral-800 px-3 py-1.5 active:bg-neutral-700"
             >
-              <Text className="text-xs font-medium text-slate-700">
+              <Text className="text-xs font-medium text-neutral-200">
                 → {ETIQUETA_ESTADO[estado]}
               </Text>
             </Pressable>
