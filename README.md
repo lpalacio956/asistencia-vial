@@ -99,8 +99,9 @@ infraestructura  ──depende de──▶  aplicación  ──depende de──�
   no con tests automatizados, por decisión de alcance.
 - `GET /servicios` trae todos los registros sin paginar; con muchos servicios (ej. cientos
   en Actividad), la respuesta y el `FlatList` del móvil crecerían sin límite.
-- El tema es oscuro fijo, sin opción de cambiar a claro — fue una decisión de diseño
-  explícita ("aire tipo Uber"), no una funcionalidad a medias.
+- El tema es oscuro fijo, sin opción de cambiar a claro — fue una decisión de diseño explícita
+- (estética inspirada en apps de movilidad, alineada con la identidad visual de Solvy),
+- no una funcionalidad a medias.
 - `react-native-reanimated` quedó instalado (dependencia de NativeWind) pero no se usa
   directamente en ningún componente — se podría remover si no se agregan animaciones.
 - No hay historial de auditoría: solo se guarda el estado actual del servicio, no quién ni
@@ -128,4 +129,3 @@ Algunas decisiones que tomé por iniciativa:
 - **Dominio modelado desde la operación real**: trabajo a diario coordinando servicios
   de asistencia vial; los estados y transiciones son una simplificación del ciclo de
   vida real de un servicio.
-  
