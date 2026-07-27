@@ -75,23 +75,15 @@ infraestructura  ──depende de──▶  aplicación  ──depende de──�
 
 ## Capturas de pantalla
 
-<!-- La carpeta docs/screenshots/ ya existe. Guarda cada imagen exactamente con
-     el nombre de archivo indicado abajo y la captura aparece sola (ya está enlazada). -->
 
-**Pestaña Servicios (tema oscuro, lista + formulario)**
-![Pestaña Servicios](docs/screenshots/01-pestana-servicios.jpeg)
-
-**Tarjeta con botones de transición válidos**
-![Tarjeta con transiciones válidas](docs/screenshots/02-tarjeta-transiciones.jpeg)
-
-**Pestaña Actividad (historial, solo lectura)**
-![Pestaña Actividad](docs/screenshots/03-pestana-actividad.jpeg)
-
-**Pestaña Actividad vacía**
-![Pestaña Actividad vacía](docs/screenshots/04-actividad-vacia.jpeg)
-
-**Pestaña Servicios vacía**
-![Pestaña Servicios vacía](docs/screenshots/05-servicios-vacio.jpeg)
+|  |  |
+| :---: | :---: |
+| **Pestaña Servicios (lista + formulario)** | **Tarjeta con transiciones válidas** |
+| <img src="docs/screenshots/01-pestana-servicios.jpeg" width="280"> | <img src="docs/screenshots/02-tarjeta-transiciones.jpeg" width="280"> |
+| **Pestaña Actividad (historial)** | **Pestaña Actividad vacía** |
+| <img src="docs/screenshots/03-pestana-actividad.jpeg" width="280"> | <img src="docs/screenshots/04-actividad-vacia.jpeg" width="280"> |
+| **Pestaña Servicios vacía** |  |
+| <img src="docs/screenshots/05-servicios-vacio.jpeg" width="280"> |  |
 
 ## Known issues
 
