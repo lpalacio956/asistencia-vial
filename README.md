@@ -79,7 +79,7 @@ infraestructura  ──depende de──▶  aplicación  ──depende de──�
      el nombre de archivo indicado abajo y la captura aparece sola (ya está enlazada). -->
 
 **Pestaña Servicios (tema oscuro, lista + formulario)**
-![Pestaña Servicios](docs/screenshots/servicios-tema-oscuro.png)
+![Pestaña Servicios](docs/screenshots/01-pestana-servicios.jpeg)
 
 **Tarjeta con botones de transición válidos**
 ![Tarjeta con transiciones válidas](docs/screenshots/tarjeta-transiciones.png)
