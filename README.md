@@ -113,3 +113,19 @@ infraestructura  ──depende de──▶  aplicación  ──depende de──�
   filtro Activos/Actividad es 100% del lado del cliente sobre la lista completa).
 - Historial/auditoría de cambios de estado (quién cambió qué y cuándo).
 - Autenticación simple si el caso de uso real lo requiriera.
+
+## Iniciativa propia
+
+Algunas decisiones que tomé por iniciativa:
+
+- **Segunda pestaña "Actividad"** con navbar flotante propio: historial de servicios
+  terminados, reutilizando la misma capa de datos con vistas derivadas (`useMemo`),
+  sin duplicar fetching ni estado.
+- **UI consciente del dominio**: `transicionesPermitidas(estado)` hace que cada tarjeta
+  solo ofrezca acciones válidas; el backend sigue siendo la fuente de verdad que valida.
+- **Identidad visual alineada a Solvy**: tema oscuro con acento naranja y tokens
+  centralizados, pensando la app como si fuera parte del ecosistema del producto.
+- **Dominio modelado desde la operación real**: trabajo a diario coordinando servicios
+  de asistencia vial; los estados y transiciones son una simplificación del ciclo de
+  vida real de un servicio.
+  
