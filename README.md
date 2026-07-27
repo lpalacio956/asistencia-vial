@@ -82,13 +82,16 @@ infraestructura  ──depende de──▶  aplicación  ──depende de──�
 ![Pestaña Servicios](docs/screenshots/01-pestana-servicios.jpeg)
 
 **Tarjeta con botones de transición válidos**
-![Tarjeta con transiciones válidas](docs/screenshots/tarjeta-transiciones.png)
+![Tarjeta con transiciones válidas](docs/screenshots/02-tarjeta-transiciones.jpeg)
 
 **Pestaña Actividad (historial, solo lectura)**
-![Pestaña Actividad](docs/screenshots/actividad-historial.png)
+![Pestaña Actividad](docs/screenshots/03-pestana-actividad.jpeg)
 
 **Pestaña Actividad vacía**
-![Pestaña Actividad vacía](docs/screenshots/actividad-vacia.png)
+![Pestaña Actividad vacía](docs/screenshots/04-actividad-vacia.jpeg)
+
+**Pestaña Servicios vacía**
+![Pestaña Servicios vacía](docs/screenshots/05-servicios-vacio.jpeg)
 
 ## Known issues
 
